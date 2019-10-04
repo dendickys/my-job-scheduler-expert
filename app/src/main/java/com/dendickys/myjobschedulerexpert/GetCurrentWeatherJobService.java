@@ -1,5 +1,6 @@
 package com.dendickys.myjobschedulerexpert;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -26,13 +27,13 @@ import cz.msebera.android.httpclient.Header;
 
 public class GetCurrentWeatherJobService extends JobService {
 
-    public static final String TAG = GetCurrentWeatherJobService.class.getSimpleName();
+    private static final String TAG = GetCurrentWeatherJobService.class.getSimpleName();
 
     // Isikan dengan API_KEY dari openweathermap
-    final String APP_ID = "08017d6051a60116c61e6a007020685a";
+    private final String APP_ID = "08017d6051a60116c61e6a007020685a";
 
     // Isiskan dengan nama kota
-    final String CITY = "Jakarta";
+    private final String CITY = "Jakarta";
 
     @Override
     public boolean onStartJob(JobParameters params) {
@@ -51,7 +52,7 @@ public class GetCurrentWeatherJobService extends JobService {
     private void getCurrentWeather(final JobParameters job) {
         Log.d(TAG, "Running");
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&appid" + APP_ID;
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&appid=" + APP_ID;
         Log.e(TAG, "getCurrentWeather: " + url);
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
